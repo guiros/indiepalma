@@ -1,6 +1,31 @@
 import logo from './indiepalma-logo.png';
+import { useState, useEffect } from 'react';
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
+}
 
 function App() {
+  const { width } = useWindowSize();
+  const isMobile = width < 1000;
+
   const styles = {
     app: {
       textAlign: 'center',
@@ -8,24 +33,66 @@ function App() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff7e0'
+      backgroundColor: '#fff7e0',
+      padding: '1rem'
     },
     content: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '2rem'
+      gap: '2rem',
+      maxWidth: '1200px',
+      width: '100%'
     },
-    logo: {
-      height: '50vmin',
-      pointerEvents: 'none'
+    subtitleContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: '2rem',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      width: '100%'
+    },
+    column: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1rem',
+      width: '500px',
+      maxWidth: '100%'
     },
     subtitle: {
       fontSize: '1.2rem',
       color: '#666',
-      maxWidth: '600px',
       lineHeight: '1.5',
       margin: 0
+    },
+    subtitle2: {
+      fontSize: '1.2rem',
+      color: '#666',
+      lineHeight: '1.5',
+      margin: 0,
+      fontWeight: 600
+    },
+    separator: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: '0.5rem',
+      margin: '0.5rem 0',
+      color: '#666',
+      width: '100%',
+      justifyContent: 'center'
+    },
+    dot: {
+      width: '4px',
+      height: '4px',
+      borderRadius: '50%',
+      backgroundColor: '#666'
+    },
+    logo: {
+      height: '50vmin',
+      maxHeight: '400px',
+      pointerEvents: 'none'
     },
     twitterLink: {
       color: '#1DA1F2',
@@ -64,17 +131,39 @@ function App() {
     <div style={styles.app}>
       <div style={styles.content}>
         <img src={logo} style={styles.logo} alt="IndiePalma Logo" />
-        <p style={styles.subtitle}>
-          A community of founders, indie hackers, developers, designers in Palma de Mallorca. Created by{' '}
-          <a 
-            href="https://twitter.com/theguiros" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={styles.twitterLink}
-          >
-            @theguiros
-          </a>
-        </p>
+        <div style={styles.subtitleContainer}>
+          <div style={styles.column}>
+            <p style={styles.subtitle}>
+              Una comunidad de fundadores, indie hackers, desarrolladores y diseñadores en Palma de Mallorca.
+            </p>
+            <p style={styles.subtitle2}>
+              Primer meetup 23 de Mayo, 2025 a las 19:00 en Paseo Mallorca
+            </p>
+          </div>
+          {isMobile && (
+            <div style={styles.separator}>
+              <div style={styles.dot}></div>
+              <div style={styles.dot}></div>
+              <div style={styles.dot}></div>
+            </div>
+          )}
+          <div style={styles.column}>
+            <p style={styles.subtitle}>
+              A community of founders, indie hackers, developers, designers in Palma de Mallorca. Created by{' '}
+              <a 
+                href="https://twitter.com/theguiros" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.twitterLink}
+              >
+                @theguiros
+              </a>
+            </p>
+            <p style={styles.subtitle2}>
+              First meetup 23rd of May, 2025 at 7:00 PM in Paseo Mallorca, Palma
+            </p>
+          </div>
+        </div>
         <a 
           href="https://chat.whatsapp.com/KqSeV0kAXZsCuQp4HbFoP5" 
           target="_blank" 
