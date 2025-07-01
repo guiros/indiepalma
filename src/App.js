@@ -146,13 +146,23 @@ function App() {
           </svg>
           Join our WhatsApp group
         </a>
+        <a
+          href="https://lu.ma/user/usr-AqgOiMhUcMRuNvc"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            ...styles.whatsappButton,
+            backgroundColor: '#ffb347', // orange accent
+            color: '#222',
+            boxShadow: '0 2px 4px rgba(255,179,71,0.15)',
+          }}
+        >
+         📅  Upcoming Events
+        </a>
         <div style={styles.subtitleContainer}>
           <div style={styles.column}>
             <p style={styles.subtitle}>
               Una comunidad de fundadores, indie hackers, desarrolladores y diseñadores en Palma de Mallorca.
-            </p>
-            <p style={styles.subtitle2}>
-              Primer meetup 23 de Mayo, 2025 a las 19:00 en Paseo Mallorca
             </p>
           </div>
           {isMobile && (
@@ -165,9 +175,6 @@ function App() {
           <div style={styles.column}>
             <p style={styles.subtitle}>
               A community of founders, indie hackers, developers, designers in Palma de Mallorca.
-            </p>
-            <p style={styles.subtitle2}>
-              First meetup 23rd of May, 2025 at 7:00 PM in Paseo Mallorca, Palma
             </p>
           </div>
           <p style={styles.subtitle}>
